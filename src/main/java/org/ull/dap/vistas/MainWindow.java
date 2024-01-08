@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
 	private JPanel pnLogin;
 
 	private JPanel pnRegister;
-	public JPanel pnControl;
+	public PanelControl pnControl;
 	private JPanel pnInicio;
 	private JLabel lblTituloAplicacion;
 	private JPanel pnInicioInferior;
@@ -50,19 +50,21 @@ public class MainWindow extends JFrame {
 
 	private JPanel getPnLogin() {
 		if (pnLogin == null) {
+			pnLogin = new PanelLogin(this);
 		}
 		return pnLogin;
 	}
 
 	private JPanel getPnRegister() {
 		if (pnRegister == null) {
+			pnRegister = new PanelRegistro(this);
 		}
 		return pnRegister;
 	}
 
 	private JPanel getPnControl() {
 		if (pnControl == null) {
-			pnControl = new JPanel();
+			pnControl = new PanelControl(this);
 		}
 		return pnControl;
 	}

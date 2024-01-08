@@ -6,8 +6,12 @@ import org.ull.dap.modelo.apicrypto.connections.IConnectionAPI;
 import org.ull.dap.modelo.apicrypto.enitity.Asset;
 import org.ull.dap.modelo.apicrypto.user.IObserver;
 import org.ull.dap.modelo.apicrypto.user.User;
+import org.ull.dap.vistas.MainWindow;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -53,7 +57,7 @@ public class CryptocurrencyNotifier implements Observable {
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(MainWindow m) {
         //VentanaNotificacion v;
         for (IObserver observer : observers) {
             //v = new VentanaNotificacion();
@@ -66,7 +70,7 @@ public class CryptocurrencyNotifier implements Observable {
                     Double currentPrice = asset.getData().getPriceUsd();
 
                     if (!Objects.equals(previousPrice, currentPrice)) {
-                        observer.update(assetId, currentPrice);//observer.update(assetId, currentPrice, v);
+                        observer.update(assetId, currentPrice, m);//observer.update(assetId, currentPrice, v);
                         //v.setVisible(true);
                         cryptoPrices.put(assetId, currentPrice);
 
@@ -77,7 +81,7 @@ public class CryptocurrencyNotifier implements Observable {
     }
 
     //Inicia las tareas programadas para obtener los datos de las criptomonedas cada 40 segundos
-    public void start() {
+    public void start(MainWindow m) {
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         ScheduledFuture<?> scheduledFuture = executorService.scheduleAtFixedRate(() -> {
             assets.clear();
@@ -95,7 +99,7 @@ public class CryptocurrencyNotifier implements Observable {
             System.out.println("\n");
 
             System.out.println("Notifying observers...\n");
-            notifyObservers();
+            notifyObservers(m);
         }, 0, TIME_TO_NOTIFY, TimeUnit.SECONDS);
 
         try {
