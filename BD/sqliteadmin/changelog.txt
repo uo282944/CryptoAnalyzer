@@ -22,13 +22,13 @@ Version 0.8.3.1 Public Beta
 
 + ESC Shortcut for canceling/closing dialogs (thx deerchao)
 
-+ INI Option [org.ull.dap.Main] Splash=0 deactivates splashscreen (for secret sqirrel)
++ INI Option [org.ull.dap.org.ull.dap.Main] Splash=0 deactivates splashscreen (for secret sqirrel)
 
 # Bugfix: CSV Export: Date / DateTime Fields will now exported sqlite valid (thx bseller)
 
 + Added "Auto Assign" feature button for fieldmapping at import dialog (for bseller, igitur)
 
-+ INI Option [org.ull.dap.Main] CodeEditorFontName="Tahoma" (for Takefumi-o)
++ INI Option [org.ull.dap.org.ull.dap.Main] CodeEditorFontName="Tahoma" (for Takefumi-o)
 
 # Bugfix: Default Values will not longer stored UpperCase (thx Piotr Drozdowski)
 
@@ -114,7 +114,7 @@ Version 0.8.2.6 Public Beta
 
 + CodeCompletion works now also with Ident Brackets
 
-+ Hidden ini Flag [org.ull.dap.Main] IgnoreInvalidToken=1
++ Hidden ini Flag [org.ull.dap.org.ull.dap.Main] IgnoreInvalidToken=1
   Hint:
     - This disables Editing on all Grids! Because Zeos Database Objects does not support Ident Brackets and Invalid Chars
     - Now you can design Tables/Fields/Indizes... with Invalid Chars
