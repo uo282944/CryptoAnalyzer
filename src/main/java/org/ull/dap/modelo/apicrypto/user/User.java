@@ -2,8 +2,7 @@ package org.ull.dap.modelo.apicrypto.user;
 
 
 import org.ull.dap.Main;
-import org.ull.dap.controladores.PanelControlController;
-import org.ull.dap.vistas.MainWindow;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,9 +31,9 @@ public class User implements IObserver {
     }
 
     @Override
-    public void update(String nameCrypto, double newPrice, MainWindow m) {
+    public void update(String nameCrypto, double newPrice) {
         cryptoPrices.put(nameCrypto,newPrice);
-        new PanelControlController().pintarHistorico(m,nameCrypto,newPrice);
+
         System.out.println(name + " has been notified about " + nameCrypto +
                 ", the price has changed to: " + cryptoPrices.get(nameCrypto) + " USD");
         //v.crearNotificacion(name,nameCrypto,newPrice);

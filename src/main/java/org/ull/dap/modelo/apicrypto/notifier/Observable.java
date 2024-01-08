@@ -3,7 +3,6 @@ package org.ull.dap.modelo.apicrypto.notifier;
 
 import org.ull.dap.Main;
 import org.ull.dap.modelo.apicrypto.user.IObserver;
-import org.ull.dap.vistas.MainWindow;
 
 public interface Observable {
 
@@ -11,5 +10,5 @@ public interface Observable {
 
     void unsubscribe(IObserver observer);
 
-    void notifyObservers(MainWindow m);
+    void notifyObservers();
 }
