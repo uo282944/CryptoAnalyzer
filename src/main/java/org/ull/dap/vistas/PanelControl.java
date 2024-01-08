@@ -254,7 +254,7 @@ public class PanelControl extends JPanel {
 	public void crearSeguimiento(String nombre){
 		JPanel pn = new JPanel();
 		JLabel foto = new JLabel();
-		foto.setIcon(resizeIcon(new ImageIcon("src/org/ull/dap/img/"+nombre+".png"),35,35));
+		foto.setIcon(resizeIcon(new ImageIcon("src/main/java/org/ull/dap/img/"+nombre+".png"),35,35));
 		JButton boton = new JButton("Borrar");
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
