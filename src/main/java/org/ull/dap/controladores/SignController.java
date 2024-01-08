@@ -1,7 +1,6 @@
 package org.ull.dap.controladores;
 
 import org.ull.dap.modelo.BusinessException;
-import org.ull.dap.modelo.apicrypto.notifier.CryptocurrencyNotifier;
 import org.ull.dap.modelo.apicrypto.user.User;
 import org.ull.dap.modelo.buisness.BuisnessFactory;
 import org.ull.dap.modelo.buisness.crypto.CryptosService.CryptoBLDto;
@@ -13,8 +12,8 @@ import org.ull.dap.vistas.PanelRegistro;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignController {
 
@@ -29,6 +28,7 @@ public class SignController {
             var user = BuisnessFactory.forUserService().findUserByNick(nick);
             if (user.isPresent()){
                 if (user.get().password.equals(password)){
+                    pasarPanelControl(m, user.get());
                 }else{
                     pn.getTxaErroresLogin().setText("The username and the password don't match");
                 }
@@ -69,7 +69,21 @@ public class SignController {
         }
     }
 
-
+    private void pasarPanelControl(MainWindow m, UserBLDto userlog) throws BusinessException {
+        List<String> cryptos = new ArrayList<>();
+        m.setUserlog(userlog);
+        var listaCryptos = BuisnessFactory.forSeguimientoService().findCryptosById(userlog.id);
+        if (listaCryptos.size() != 0) {
+            m.cryptoSelected = listaCryptos.get(0).nombre;
+            m.pnControl.lblCrypto.setText("Crypto: " + m.cryptoSelected);
+            for (CryptoBLDto a : listaCryptos) {
+                m.pnControl.crearSeguimiento(a.nombre);
+                cryptos.add(a.nombre);
+            }
+        }
+        realizarStartEnSegundoPlano(m, userlog, cryptos);
+        m.pasarPanel("CONTROL");
+    }
 
 
     private void realizarStartEnSegundoPlano(MainWindow m, UserBLDto userlog, List<String> cryptos) {
@@ -78,7 +92,7 @@ public class SignController {
             protected Void doInBackground() throws Exception {
                 m.usersuscribe = new User(userlog.nick,1L,cryptos);
                 m.cc.subscribe(m.usersuscribe);
-                m.cc.start();
+                m.cc.start(m);
                 return null;
             }
 
