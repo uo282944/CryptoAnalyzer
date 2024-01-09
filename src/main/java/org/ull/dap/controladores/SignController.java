@@ -43,6 +43,8 @@ public class SignController {
         m.pasarPanel("REGISTER");
     }
 
+
+
     public void register(PanelRegistro pn, MainWindow m) {
         String nick = pn.getTxNick().getText();
         String email = pn.getTxEmail().getText();
@@ -75,6 +77,7 @@ public class SignController {
         var listaCryptos = BuisnessFactory.forSeguimientoService().findCryptosById(userlog.id);
         if (listaCryptos.size() != 0) {
             m.cryptoSelected = listaCryptos.get(0).nombre;
+
             m.pnControl.lblCrypto.setText("Crypto: " + m.cryptoSelected);
             for (CryptoBLDto a : listaCryptos) {
                 m.pnControl.crearSeguimiento(a.nombre);
