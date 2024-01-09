@@ -6,12 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelRegistro extends JPanel {
 	private JTextField txNick;
 	private JTextField txEmail;
-	private JTextField txPassword;
+	private JPasswordField txPassword;
 	private JButton btnRegistrar;
+	private JButton btnVolver;
 	private JLabel lblTitulo;
 	private JTextArea txaErroresNick;
 	private JTextArea txaErroresEmail;
@@ -26,26 +29,49 @@ public class PanelRegistro extends JPanel {
 	 */
 	public PanelRegistro(MainWindow m) {
 		this.m = m;
-		setLayout(null);
-		add(getTxNick());
-		add(getTxEmail());
-		add(getTxPassword());
-		add(getBtnRegistrar());
-		add(getLblTitulo());
-		add(getTxaErroresNick());
-		add(getTxaErroresEmail());
-		add(getTxaErroresContraseña());
-		add(getLblContraseña());
-		add(getLblEmail());
-		add(getLblNick());
+		setBackground(new Color(243, 238, 234));
+		setLayout(new GridBagLayout());
+		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.gridwidth = GridBagConstraints.REMAINDER;
+		constraints.anchor = GridBagConstraints.CENTER;
+		constraints.insets = new Insets(5, 4, 5, 4);
+
+		constraints.fill = GridBagConstraints.NONE;
+
+		add(getLblTitulo(), constraints);
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+
+		add(getLblNick(), constraints);
+		add(getTxNick(), constraints);
+		add(getTxaErroresNick(), constraints);
+
+		add(getLblEmail(), constraints);
+		add(getTxEmail(), constraints);
+		add(getTxaErroresEmail(), constraints);
+
+		add(getLblContraseña(), constraints);
+		add(getTxPassword(), constraints);
+		add(getTxaErroresContraseña(), constraints);
+
+		constraints.fill = GridBagConstraints.REMAINDER;
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(getBtnRegistrar(),BorderLayout.EAST);
+		panel.add(Box.createHorizontalStrut(50),BorderLayout.CENTER);
+		panel.add(getBtnVolver(),BorderLayout.WEST);
+
+		add(panel, constraints);
 
 	}
 
 	public JTextField getTxNick() {
 		if (txNick == null) {
 			txNick = new JTextField();
-			txNick.setBounds(40, 146, 369, 19);
-			txNick.setColumns(10);
+			txNick.setBorder(null);
+			txNick.setBackground(Color.white);
+			txNick.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+			txNick.setPreferredSize(new Dimension(txNick.getPreferredSize().width,30));
+			txNick.setColumns(30);
 		}
 		return txNick;
 	}
@@ -53,17 +79,23 @@ public class PanelRegistro extends JPanel {
 	public JTextField getTxEmail() {
 		if (txEmail == null) {
 			txEmail = new JTextField();
-			txEmail.setBounds(40, 255, 369, 19);
-			txEmail.setColumns(10);
+			txEmail.setBorder(null);
+			txEmail.setBackground(Color.white);
+			txEmail.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+			txEmail.setPreferredSize(new Dimension(txEmail.getPreferredSize().width,30));
+			txEmail.setColumns(30);
 		}
 		return txEmail;
 	}
 
-	public JTextField getTxPassword() {
+	public JPasswordField getTxPassword() {
 		if (txPassword == null) {
-			txPassword = new JTextField();
-			txPassword.setBounds(40, 353, 369, 19);
-			txPassword.setColumns(10);
+			txPassword = new JPasswordField();
+			txPassword.setBorder(null);
+			txPassword.setBackground(Color.white);
+			txPassword.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+			txPassword.setPreferredSize(new Dimension(txPassword.getPreferredSize().width,30));
+			txPassword.setColumns(30);
 		}
 		return txPassword;
 	}
@@ -71,21 +103,65 @@ public class PanelRegistro extends JPanel {
 	private JButton getBtnRegistrar() {
 		if (btnRegistrar == null) {
 			btnRegistrar = new JButton("Register");
+			btnRegistrar.setBackground(new Color(178, 165, 155));
+			btnRegistrar.setBorder(BorderFactory.createEmptyBorder(5, 30, 5, 30));
+			btnRegistrar.setBorderPainted(false);
+			// Agrega un manejador de eventos del ratón para cambiar la apariencia en hover
+			btnRegistrar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btnRegistrar.setBackground(new Color(142, 132, 125));
+
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btnRegistrar.setBackground(new Color(178, 165, 155));
+
+				}
+			});
 			btnRegistrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new SignController().register(PanelRegistro.this, m);
 				}
 			});
-			btnRegistrar.setBounds(174, 421, 85, 21);
 		}
 		return btnRegistrar;
+	}
+
+	private JButton getBtnVolver() {
+		if (btnVolver == null) {
+			btnVolver = new JButton("Volver");
+			btnVolver.setBackground(new Color(178, 165, 155));
+			btnVolver.setBorder(BorderFactory.createEmptyBorder(5, 30, 5, 30));
+			btnVolver.setBorderPainted(false);
+			// Agrega un manejador de eventos del ratón para cambiar la apariencia en hover
+			btnVolver.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btnVolver.setBackground(new Color(142, 132, 125));
+
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btnVolver.setBackground(new Color(178, 165, 155));
+
+				}
+			});
+			btnVolver.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new SignController().pasarLogin( m);
+				}
+			});
+		}
+		return btnVolver;
 	}
 
 	private JLabel getLblTitulo() {
 		if (lblTitulo == null) {
 			lblTitulo = new JLabel("Register");
-			lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			lblTitulo.setBounds(40, 10, 249, 40);
+			lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 30));
 		}
 		return lblTitulo;
 	}
@@ -96,8 +172,7 @@ public class PanelRegistro extends JPanel {
 			txaErroresNick.setEditable(false);
 			txaErroresNick.setForeground(Color.RED);
 			txaErroresNick.setWrapStyleWord(true);
-			txaErroresNick.setBackground(SystemColor.control);
-			txaErroresNick.setBounds(40, 175, 369, 33);
+			txaErroresNick.setBackground(new Color(243, 238, 234));
 		}
 		return txaErroresNick;
 	}
@@ -108,8 +183,7 @@ public class PanelRegistro extends JPanel {
 			txaErroresEmail.setWrapStyleWord(true);
 			txaErroresEmail.setForeground(Color.RED);
 			txaErroresEmail.setEditable(false);
-			txaErroresEmail.setBackground(SystemColor.control);
-			txaErroresEmail.setBounds(40, 279, 369, 33);
+			txaErroresEmail.setBackground(new Color(243, 238, 234));
 		}
 		return txaErroresEmail;
 	}
@@ -120,8 +194,7 @@ public class PanelRegistro extends JPanel {
 			txaErroresContraseña.setEditable(false);
 			txaErroresContraseña.setForeground(Color.RED);
 			txaErroresContraseña.setWrapStyleWord(true);
-			txaErroresContraseña.setBackground(SystemColor.control);
-			txaErroresContraseña.setBounds(40, 378, 369, 33);
+			txaErroresContraseña.setBackground(new Color(243, 238, 234));
 		}
 		return txaErroresContraseña;
 	}
@@ -129,8 +202,7 @@ public class PanelRegistro extends JPanel {
 	private JLabel getLblContraseña() {
 		if (lblContraseña == null) {
 			lblContraseña = new JLabel("Password");
-			lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblContraseña.setBounds(40, 322, 192, 28);
+			lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		}
 		return lblContraseña;
 	}
@@ -138,8 +210,7 @@ public class PanelRegistro extends JPanel {
 	private JLabel getLblEmail() {
 		if (lblEmail == null) {
 			lblEmail = new JLabel("Email");
-			lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblEmail.setBounds(40, 217, 192, 28);
+			lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		}
 		return lblEmail;
 	}
@@ -147,8 +218,7 @@ public class PanelRegistro extends JPanel {
 	private JLabel getLblNick() {
 		if (lblNick == null) {
 			lblNick = new JLabel("Username");
-			lblNick.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblNick.setBounds(40, 107, 192, 28);
+			lblNick.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		}
 		return lblNick;
 	}

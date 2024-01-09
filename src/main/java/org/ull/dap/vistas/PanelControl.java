@@ -1,9 +1,13 @@
 package org.ull.dap.vistas;
 
 import org.ull.dap.controladores.PanelControlController;
+import org.ull.dap.controladores.SignController;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +38,10 @@ public class PanelControl extends JPanel {
 	private JButton btnElegir;
 	private JPanel pnCryptosElegidas;
 	private JScrollPane scpnHistorico;
+	private Color bgdG = new Color(243, 238, 234);
+	//private Color bgdG2 = new Color(100, 125, 135);
+	private Color bgdG2 = new Color(178, 165, 155);
+
 
 	private MainWindow m;
 	/**
@@ -41,6 +49,7 @@ public class PanelControl extends JPanel {
 	 */
 	public PanelControl(MainWindow m) {
 		this.m = m;
+		setBackground(bgdG);
 		setLayout(new BorderLayout(0, 0));
 		add(getPnControl(), BorderLayout.CENTER);
 		add(getPnSeguimiento(), BorderLayout.EAST);
@@ -50,7 +59,9 @@ public class PanelControl extends JPanel {
 	private JPanel getPnControl() {
 		if (pnControl == null) {
 			pnControl = new JPanel();
-			pnControl.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			pnControl.setOpaque(false);
+			pnControl.setBorder(new EmptyBorder(10,10,10,10));
+			//pnControl.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			pnControl.setLayout(new BorderLayout(0, 0));
 			pnControl.add(getLblControl(), BorderLayout.NORTH);
 			pnControl.add(getPnHistorico(), BorderLayout.EAST);
@@ -61,11 +72,13 @@ public class PanelControl extends JPanel {
 	private JPanel getPnSeguimiento() {
 		if (pnSeguimiento == null) {
 			pnSeguimiento = new JPanel();
-			pnSeguimiento.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			pnSeguimiento.setBackground(bgdG2);
+			pnSeguimiento.setBorder(new LineBorder(Color.BLACK,2));
 			pnSeguimiento.setLayout(new BorderLayout(0, 0));
 			pnSeguimiento.add(getLblSeguimiento(), BorderLayout.NORTH);
 			pnSeguimiento.add(getPnElegir(), BorderLayout.SOUTH);
 			pnSeguimiento.add(getPnCryptosElegidas(), BorderLayout.CENTER);
+
 		}
 		return pnSeguimiento;
 	}
@@ -75,6 +88,7 @@ public class PanelControl extends JPanel {
 			scpnHistorico = new JScrollPane();
 			scpnHistorico.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scpnHistorico.setViewportView(getTxaHistorico());
+
 		}
 		return scpnHistorico;
 	}
@@ -90,6 +104,7 @@ public class PanelControl extends JPanel {
 	private JLabel getLblSeguimiento() {
 		if (lblSeguimiento == null) {
 			lblSeguimiento = new JLabel("   Seguimiento   ");
+			lblSeguimiento.setBackground(bgdG2);
 			lblSeguimiento.setFont(new Font("Tahoma", Font.BOLD, 30));
 		}
 		return lblSeguimiento;
@@ -97,7 +112,7 @@ public class PanelControl extends JPanel {
 	private JLabel getLblControl() {
 		if (lblControl == null) {
 			lblControl = new JLabel("Panel de control");
-			lblControl.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			//lblControl.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			lblControl.setFont(new Font("Tahoma", Font.BOLD, 30));
 		}
 		return lblControl;
@@ -105,7 +120,8 @@ public class PanelControl extends JPanel {
 	private JPanel getPnHistorico() {
 		if (pnHistorico == null) {
 			pnHistorico = new JPanel();
-			pnHistorico.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			pnHistorico.setBackground(bgdG2);
+			pnHistorico.setBorder(new LineBorder(Color.BLACK, 2));
 			pnHistorico.setLayout(new BorderLayout(0, 0));
 			pnHistorico.add(getLblHistorico(), BorderLayout.NORTH);
 			pnHistorico.add(getScpnHistorico(), BorderLayout.CENTER);
@@ -122,6 +138,8 @@ public class PanelControl extends JPanel {
 	private JPanel getPnControlCentro() {
 		if (pnControlCentro == null) {
 			pnControlCentro = new JPanel();
+			pnControlCentro.setBorder(new EmptyBorder(0,0,0,5));
+			pnControlCentro.setOpaque(false);
 			pnControlCentro.setLayout(new BorderLayout(0, 0));
 			pnControlCentro.add(getPnExtremos_1(), BorderLayout.SOUTH);
 			pnControlCentro.add(getPnGrafica(), BorderLayout.CENTER);
@@ -131,7 +149,9 @@ public class PanelControl extends JPanel {
 	private JPanel getPnExtremos_1() {
 		if (pnExtremos == null) {
 			pnExtremos = new JPanel();
-			pnExtremos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			pnExtremos.setBorder(new LineBorder(Color.black,2));
+			pnExtremos.setBackground(bgdG2);
+			//pnExtremos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			pnExtremos.setLayout(new GridLayout(3, 1, 0, 0));
 			pnExtremos.add(getPnTitulo());
 			pnExtremos.add(getPnMaximo());
@@ -142,24 +162,33 @@ public class PanelControl extends JPanel {
 	private JPanel getPnMaximo() {
 		if (pnMaximo == null) {
 			pnMaximo = new JPanel();
+			pnMaximo.setOpaque(false);
 			pnMaximo.setLayout(new GridLayout(0, 2, 0, 0));
 			pnMaximo.add(getLabel_2());
 			pnMaximo.add(getTxMaximo());
+			pnMaximo.setBorder(new EmptyBorder(0,5,0,0));
+
+
 		}
 		return pnMaximo;
 	}
 	private JPanel getPnMinimo() {
 		if (pnMinimo == null) {
 			pnMinimo = new JPanel();
+			pnMinimo.setBorder(new EmptyBorder(0,5,0,0));
+			pnMinimo.setOpaque(false);
 			pnMinimo.setLayout(new GridLayout(1, 2, 0, 0));
 			pnMinimo.add(getLabel_3());
 			pnMinimo.add(getTxMinimo());
+
 		}
 		return pnMinimo;
 	}
 	private JPanel getPnTitulo() {
 		if (pnTitulo == null) {
 			pnTitulo = new JPanel();
+			pnTitulo.setBorder(new EmptyBorder(0,5,0,0));
+			pnTitulo.setOpaque(false);
 			pnTitulo.setLayout(new GridLayout(0, 1, 0, 0));
 			pnTitulo.add(getLabel_1());
 		}
@@ -184,6 +213,8 @@ public class PanelControl extends JPanel {
 			txMaximo = new JTextField();
 			txMaximo.setHorizontalAlignment(SwingConstants.CENTER);
 			txMaximo.setFont(new Font("Tahoma", Font.BOLD, 25));
+			txMaximo.setOpaque(false);
+			txMaximo.setBorder(null);
 			txMaximo.setText("0");
 			txMaximo.setEditable(false);
 			txMaximo.setColumns(10);
@@ -201,10 +232,13 @@ public class PanelControl extends JPanel {
 		if (txMinimo == null) {
 			txMinimo = new JTextField();
 			txMinimo.setText("0");
+			txMinimo.setBorder(null);
 			txMinimo.setHorizontalAlignment(SwingConstants.CENTER);
 			txMinimo.setFont(new Font("Tahoma", Font.BOLD, 25));
 			txMinimo.setEditable(false);
 			txMinimo.setColumns(10);
+			txMinimo.setOpaque(false);
+
 		}
 		return txMinimo;
 	}
@@ -218,7 +252,8 @@ public class PanelControl extends JPanel {
 	private JPanel getPnElegir() {
 		if (pnElegir == null) {
 			pnElegir = new JPanel();
-			pnElegir.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			pnElegir.setBackground(Color.white);
+			pnElegir.setBorder(new EmptyBorder(0,10,10,10));
 			pnElegir.setLayout(new BorderLayout(0, 0));
 			pnElegir.add(getTxElegir(), BorderLayout.CENTER);
 			pnElegir.add(getBtnElegir(), BorderLayout.EAST);
@@ -229,12 +264,36 @@ public class PanelControl extends JPanel {
 		if (txElegir == null) {
 			txElegir = new JTextField();
 			txElegir.setColumns(10);
+
+
+			txElegir.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					new PanelControlController().crearSeguimiento(m, PanelControl.this);
+				}
+			});
 		}
 		return txElegir;
 	}
 	private JButton getBtnElegir() {
 		if (btnElegir == null) {
 			btnElegir = new JButton("OK");
+			btnElegir.setBorderPainted(false);
+			btnElegir.setBackground(bgdG2);
+
+			btnElegir.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btnElegir.setBackground(new Color(142, 132, 125));
+
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btnElegir.setBackground(bgdG2);
+
+				}
+			});
 			btnElegir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new PanelControlController().crearSeguimiento(m, PanelControl.this);
@@ -246,6 +305,8 @@ public class PanelControl extends JPanel {
 	private JPanel getPnCryptosElegidas() {
 		if (pnCryptosElegidas == null) {
 			pnCryptosElegidas = new JPanel();
+			pnCryptosElegidas.setBackground(Color.white);
+
 			pnCryptosElegidas.setLayout(new GridLayout(10, 1, 0, 0));
 		}
 		return pnCryptosElegidas;
@@ -253,9 +314,18 @@ public class PanelControl extends JPanel {
 
 	public void crearSeguimiento(String nombre){
 		JPanel pn = new JPanel();
+		pn.setBorder(new EmptyBorder(0,10,0,10));
+		pn.setOpaque(false);
 		JLabel foto = new JLabel();
+		foto.setOpaque(false);
 		foto.setIcon(resizeIcon(new ImageIcon("src/main/java/org/ull/dap/img/"+nombre+".png"),35,35));
-		JButton boton = new JButton("Borrar");
+		JButton boton = new JButton();
+		boton.setBackground(Color.white);
+		boton.setFocusable(false);
+		boton.setFocusPainted(false);
+		boton.setBorderPainted(false);
+		boton.setPreferredSize(new Dimension(30,30));
+		boton.setIcon(new ImageIcon("src/main/java/org/ull/dap/img/trash.png"));
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new PanelControlController().borrarCrypto(m, nombre, pn);
