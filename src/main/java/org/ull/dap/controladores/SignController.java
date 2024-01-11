@@ -20,9 +20,9 @@ public class SignController {
     public void pasarLogin(MainWindow m){
         m.pasarPanel("LOGIN");
     }
-    public void login(PanelLogin pn, MainWindow m) {
-        String nick = pn.getTxUsername().getText();
-        String password = pn.getTxPassword().getText();
+    public void login(MainWindow m) {
+        String nick = ((PanelLogin)m.getPnLogin()).getTxUsername().getText();
+        String password = ((PanelLogin)m.getPnLogin()).getTxPassword().getText();
 
         try{
             var user = BuisnessFactory.forUserService().findUserByNick(nick);
@@ -30,10 +30,12 @@ public class SignController {
                 if (user.get().password.equals(password)){
                     pasarPanelControl(m, user.get());
                 }else{
-                    pn.getTxaErroresLogin().setText("The username and the password don't match");
+                    ((PanelLogin)m.getPnLogin())
+                            .getTxaErroresLogin()
+                            .setText("The username and the password don't match");
                 }
             }else{
-                pn.getTxaErroresLogin().setText("The username doesn't exist");
+                ((PanelLogin)m.getPnLogin()).getTxaErroresLogin().setText("The username doesn't exist");
             }
         }catch (BusinessException e){
             e.printStackTrace();

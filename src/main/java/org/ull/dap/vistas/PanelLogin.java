@@ -99,7 +99,7 @@ public class PanelLogin extends JPanel {
 			txPassword.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					new SignController().login(PanelLogin.this, m);
+					new SignController().login(m);
 				}
 			});
 		}
@@ -129,7 +129,7 @@ public class PanelLogin extends JPanel {
 			});
 			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new SignController().login(PanelLogin.this, m);
+					new SignController().login(m);
 				}
 			});
 

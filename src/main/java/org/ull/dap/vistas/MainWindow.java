@@ -54,7 +54,7 @@ public class MainWindow extends JFrame {
 		panelPrincipal.add(getPnControl(), "CONTROL");
 	}
 
-	private JPanel getPnLogin() {
+	public JPanel getPnLogin() {
 		if (pnLogin == null) {
 			pnLogin = new PanelLogin(this);
 		}
