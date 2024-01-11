@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 
 public class CommandExecutor {
-
 	public <T> T execute(Command<T> cmd) throws BusinessException {
 		Connection c = null;
 		try {
@@ -32,7 +31,6 @@ public class CommandExecutor {
 		} finally {
 			Jdbc.close(c);
 		}
-		
 	}
 
 }
