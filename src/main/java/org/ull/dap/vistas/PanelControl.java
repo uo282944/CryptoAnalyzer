@@ -325,7 +325,7 @@ public class PanelControl extends JPanel {
 		boton.setFocusPainted(false);
 		boton.setBorderPainted(false);
 		boton.setPreferredSize(new Dimension(30,30));
-		boton.setIcon(new ImageIcon("src/main/java/org/ull/dap/img/trash.png"));
+		boton.setIcon(resizeIcon(new ImageIcon("src/main/java/org/ull/dap/img/trash.png"),35,35));
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new PanelControlController().borrarCrypto(m, nombre, pn);

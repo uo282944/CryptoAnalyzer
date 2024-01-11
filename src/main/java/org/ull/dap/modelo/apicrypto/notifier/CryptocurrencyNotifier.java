@@ -32,7 +32,7 @@ public class CryptocurrencyNotifier implements Observable {
     public CryptocurrencyNotifier() {
         this.observers = new ArrayList<>();
         this.connectionAPI = new CryptocurrencyAPI();
-        this.namesCryptocurrencies = List.of("bitcoin", "ethereum", "litecoin", "cardano");
+        this.namesCryptocurrencies = List.of("bitcoin", "ethereum", "litecoin", "cardano", "monero", "dogecoin", "solana","cosmos", "okb");
         this.assets = new ArrayList<>();
     }
 

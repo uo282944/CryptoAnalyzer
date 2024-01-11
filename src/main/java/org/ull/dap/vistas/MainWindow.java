@@ -38,11 +38,12 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("CryptoAnalyzer");
 		setSize(543, 491);
 		setLocationRelativeTo(null);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
-		Image icono = Toolkit.getDefaultToolkit().getImage("src/main/java/org/ull/dap/img/bitcoin.png");
+		Image icono = Toolkit.getDefaultToolkit().getImage("src/main/java/org/ull/dap/img/icono.png");
 		setIconImage(icono);
 
 		setContentPane(panelPrincipal);
