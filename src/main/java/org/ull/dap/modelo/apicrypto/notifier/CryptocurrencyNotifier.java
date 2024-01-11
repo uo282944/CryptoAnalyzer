@@ -27,7 +27,7 @@ public class CryptocurrencyNotifier implements Observable {
 
     private List<Asset> assets;
 
-    private final int TIME_TO_NOTIFY = 40;
+    private final int TIME_TO_NOTIFY = 10;
 
     public CryptocurrencyNotifier() {
         this.observers = new ArrayList<>();

@@ -3,6 +3,8 @@ package org.ull.dap.controladores;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -121,7 +123,7 @@ public class PanelControlController {
         calendar.setTime(initialTime);
         for (double precio: m.precios.get(nameCrypto)) {
             series.add(new Second(calendar.getTime()), precio);
-            calendar.add(Calendar.SECOND, 40);
+            calendar.add(Calendar.SECOND, 10);
         }
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
@@ -136,10 +138,15 @@ public class PanelControlController {
                 true,
                 false);
 
-        // Crear un panel del gráfico
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.DARK_GRAY);
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesPaint(0, Color.GREEN);
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+        plot.setRenderer(renderer);
+
         ChartPanel chartPanel = new ChartPanel(chart);
 
-        // Crear y mostrar un marco para ver el gráfico
         m.pnControl.getPnGrafica().removeAll();
         m.pnControl.getPnGrafica().add(chartPanel, BorderLayout.CENTER);
         m.pnControl.getPnGrafica().revalidate();
